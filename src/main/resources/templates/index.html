@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8"/>
+	<title>🇺🇦 5 daily ukrainian words</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}" type="text/css"/>
+	<link href="https://fonts.googleapis.com" rel="preconnect">
+	<link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+</head>
+<body>
+<table>
+	<thead>
+	<tr>
+		<th class="title" colspan="2">Here you daily words:</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td class="ua">🇺🇦</td>
+		<td class="en">🇬🇧</td>
+	</tr>
+	<tr class="word" th:each="word : ${words}">
+		<td class="ua" th:utext="${word.ukrainian}">...</td>
+		<td class="en" th:utext="${word.english}">...</td>
+	</tr>
+	</tbody>
+</table>
+</body>
+</html>

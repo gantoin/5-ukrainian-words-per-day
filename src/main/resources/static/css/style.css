@@ -1,0 +1,28 @@
+body {
+    background: gainsboro;
+}
+
+table {
+    text-align: center;
+    font-size: 45px;
+    font-family: 'Roboto', sans-serif;
+    margin: 30px auto auto;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 55px;
+    padding-bottom: 15px;
+}
+
+.word {
+    padding-bottom: 5px;
+}
+
+.ua {
+    width: 50%;
+}
+
+.en {
+    width: 50%;
+}
