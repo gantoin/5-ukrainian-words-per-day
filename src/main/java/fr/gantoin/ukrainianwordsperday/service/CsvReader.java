@@ -1,17 +1,12 @@
 package fr.gantoin.ukrainianwordsperday.service;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
 import org.springframework.stereotype.Service;
@@ -27,27 +22,24 @@ public class CsvReader {
     private final List<Word> words = new ArrayList<>();
 
     public CsvReader() throws URISyntaxException, IOException {
-        URL url = Thread.currentThread().getContextClassLoader().getResource("static/words.csv");
-        Path path = Paths.get(Objects.requireNonNull(url).toURI());
-        CsvReader.readFile(new File(path.toString())).forEach(line -> {
+        InputStream resourceAsStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("static/words.csv");
+        CsvReader.readFile(resourceAsStream).forEach(line -> {
             String[] strings = line.split(",");
             Word word = new Word(Integer.parseInt(strings[0]), strings[1], strings[2]);
             words.add(word);
         });
     }
 
-    public static List<String> readFile(File file) throws IOException {
+    public static List<String> readFile(InputStream resourceAsStream) throws IOException {
         List<String> result = new ArrayList<>();
-
-        FileReader fr = new FileReader(file, StandardCharsets.UTF_8);
-        BufferedReader br = new BufferedReader(fr);
+        BufferedReader br = new BufferedReader(new InputStreamReader(resourceAsStream, "UTF-8"));
 
         for (String line = br.readLine(); line != null; line = br.readLine()) {
             result.add(line);
         }
 
         br.close();
-        fr.close();
+        resourceAsStream.close();
 
         return result;
     }
